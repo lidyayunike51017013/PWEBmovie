@@ -7,28 +7,29 @@
    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
    <link rel="stylesheet" href="css/style.css" media="screen,projection">
 
-   <meta name="viewport" content="widht=device-widht, initial-scale=1.0"/>
+   <meta name="viewsport" content="widht=device-widht, initial-scale=1.0"/>
 
    <title>PWEB Movie</title>
  </head>
  <body>
 
-   <nav class="grey" role="navigation">
+   <nav class="black" role="navigation">
      <div class="nav-wrapper container">
-       <a href="/praktikum9" class="brand-logo white-text">PWEB Movie</a>
+       <a href="/Praktikum9" class="brand-logo white-text">PWEB Movie</a>
        <ul class="topnav right hide-on-med-and-down">
-         <li><a href="#" class="white-text">Now Playing</a></li>
-          <li><a href="#" class="white-text">Up Coming</a></li>
-           <li><a href="#" class="white-text">Popular</a></li>
-            <li><a href="#" class="white-text">Top Rated</a></li>
+         <li><a href="#playing" class="white-text">Now Playing</a></li>
+          <li><a href="#upcoming" class="white-text">Up Coming</a></li>
+           <li><a href="#popular" class="white-text">Popular</a></li>
+            <li><a href="#toprated" class="white-text">Top Rated</a></li>
             </ul>
 
        <ul id="nav-mobile" class="sidenav">
-         <li><a href="#">Now Playing</a></li>
-         <li><a href="#">Up Coming</a></li>
-         <li><a href="#">Popular</a></li>
-         <li><a href="#">Top Rated</a></li>
+         <li><a href="#playing">Now Playing</a></li>
+         <li><a href="#upcoming">Up Coming</a></li>
+         <li><a href="#popular">Popular</a></li>
+         <li><a href="#toprated">Top Rated</a></li>
        </ul>
+
        <a href="#" data-target="nav-mobile" class="sidenav-trigger">
          <i class="material-icons white-text">menu</i></a>
      </div>
@@ -66,8 +67,36 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
-
     <script type="text/javascript" src="js/tmdb.js"></script>
-    
+    <script type="text/javascript">
+    document.addEventListener ("DOMContentLoaded", function(){
+      var page = window.location.hash.substr (1);
+
+      document.querySelectorAll(".topnav a, .sidenav a")
+      .forEach(function(element){
+
+        element.addEventListener("click", function (event){
+          page = event.target.getAttribute("href").substr(1);
+          switch (page) {
+            case "Playing":
+            getListMovie("/movie/now_playing", "Now Playing");
+            break;
+            case "Upcoming" :
+            getListMovie("/movie/upcoming", "Up Coming");
+            break;
+            case "populer":
+            getListMovie("/movie/populer","Popular");
+            break;
+            case "toprated":
+            getListMovie("/movie/top_rated","Top Rated");
+            break;
+          }
+        });
+      });
+    getListMovie("/movie/now_playing","Now Playing");
+
+});
+
+  </script>
   </body>
 </html>
